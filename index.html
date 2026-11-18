@@ -86,10 +86,10 @@
 </head>
 <body class="min-h-screen flex items-center justify-center sm:p-4 bg-gradient-to-br from-slate-200 via-sky-100 to-slate-300">
 
-    <!-- Mobile App Viewport Frame (Full screen on mobile, phone frame on desktop) -->
+    <!-- Mobile App Viewport Frame -->
     <div id="app-shell" class="relative w-full h-[100dvh] sm:h-[820px] sm:max-w-[410px] bg-slate-50 sm:rounded-[2.75rem] sm:border-[8px] sm:border-slate-900 sm:shadow-2xl flex flex-col overflow-hidden">
         
-        <!-- Simulated Mobile Status Bar (Desktop visual polish) -->
+        <!-- Simulated Mobile Status Bar -->
         <div class="hidden sm:flex items-center justify-between px-6 pt-3 pb-1 bg-white text-[11px] font-medium text-slate-600 select-none">
             <span id="clock-time">09:41</span>
             <div class="w-20 h-4 bg-slate-900 rounded-full"></div>
@@ -106,17 +106,15 @@
                     <i data-lucide="shield-check" class="w-5 h-5"></i>
                 </div>
                 <div>
-                    <h1 class="text-base font-bold text-slate-800 leading-tight">MaskGuard </h1>
+                    <h1 class="text-base font-bold text-slate-800 leading-tight">MaskGuard</h1>
                     <p class="text-[11px] text-slate-500 font-normal">ระบบตรวจจับหน้ากากอนามัย</p>
                 </div>
             </div>
             
             <div class="flex items-center gap-1.5">
-                <!-- QR Code Button -->
                 <button onclick="openModal('qr-modal')" title="QR Code สำหรับติดตั้ง/แชร์" class="p-2.5 rounded-xl bg-slate-100 hover:bg-sky-50 text-slate-600 hover:text-sky-600 transition active:scale-95">
                     <i data-lucide="qr-code" class="w-5 h-5"></i>
                 </button>
-                <!-- Model Info & Instructions Button -->
                 <button onclick="openModal('info-modal')" title="ข้อมูลโมเดล & วิธีใช้งาน" class="p-2.5 rounded-xl bg-slate-100 hover:bg-sky-50 text-slate-600 hover:text-sky-600 transition active:scale-95">
                     <i data-lucide="info" class="w-5 h-5"></i>
                 </button>
@@ -129,7 +127,6 @@
             <!-- Camera Viewfinder Section -->
             <div class="relative w-full aspect-square max-h-[340px] mx-auto bg-slate-900 rounded-3xl overflow-hidden shadow-lg border border-slate-200 flex items-center justify-center">
                 
-                <!-- Live Webcam Canvas Container -->
                 <div id="webcam-container" class="w-full h-full flex items-center justify-center"></div>
 
                 <!-- Idle Placeholder State -->
@@ -148,28 +145,20 @@
                     <p class="text-[11px] text-slate-400 mt-1">โปรดอนุญาตการเข้าถึงกล้องบนอุปกรณ์</p>
                 </div>
 
-                <!-- Viewfinder Corner Brackets & Scanner Overlay (Visible when active) -->
+                <!-- Scanner Overlay -->
                 <div id="scanner-overlay" class="hidden pointer-events-none absolute inset-0 p-4">
-                    <!-- Top-Left Corner -->
                     <div class="absolute top-4 left-4 w-7 h-7 border-t-[3px] border-l-[3px] border-sky-400 rounded-tl-xl"></div>
-                    <!-- Top-Right Corner -->
                     <div class="absolute top-4 right-4 w-7 h-7 border-t-[3px] border-r-[3px] border-sky-400 rounded-tr-xl"></div>
-                    <!-- Bottom-Left Corner -->
                     <div class="absolute bottom-4 left-4 w-7 h-7 border-b-[3px] border-l-[3px] border-sky-400 rounded-bl-xl"></div>
-                    <!-- Bottom-Right Corner -->
                     <div class="absolute bottom-4 right-4 w-7 h-7 border-b-[3px] border-r-[3px] border-sky-400 rounded-br-xl"></div>
-                    
-                    <!-- Animated Scan Line -->
                     <div class="scanner-line absolute left-6 right-6 h-0.5 bg-gradient-to-r from-transparent via-sky-400 to-transparent shadow-[0_0_8px_#38bdf8]"></div>
-
-                    <!-- Live Status Pill -->
                     <div class="absolute top-3.5 left-1/2 -translate-x-1/2 bg-slate-900/70 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-1.5 border border-white/10">
                         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                         <span class="text-[10px] font-medium text-white tracking-wider uppercase">LIVE AI SCAN</span>
                     </div>
                 </div>
 
-                <!-- Camera Controls Overlay (Flip Mirror / Switch Camera) -->
+                <!-- Camera Controls Overlay -->
                 <div id="camera-tools" class="hidden absolute bottom-3 right-3 z-10 flex items-center gap-2">
                     <button onclick="toggleMirror()" title="กลับด้านภาพ (Mirror)" class="p-2 rounded-xl bg-slate-900/70 hover:bg-slate-900 text-white backdrop-blur-md border border-white/15 transition active:scale-95">
                         <i data-lucide="flip-horizontal" class="w-4 h-4"></i>
@@ -180,7 +169,7 @@
                 </div>
             </div>
 
-            <!-- Inline Error / Status Message Box (No alert() used) -->
+            <!-- Status Banner -->
             <div id="status-banner" class="hidden rounded-2xl p-3 text-xs font-medium flex items-start gap-2.5 bg-amber-50 text-amber-800 border border-amber-200">
                 <i data-lucide="alert-circle" class="w-4 h-4 shrink-0 mt-0.5 text-amber-600"></i>
                 <span id="status-banner-text">ข้อความแจ้งเตือน</span>
@@ -196,12 +185,10 @@
                 </div>
 
                 <div class="flex items-center gap-3.5 my-1">
-                    <!-- Dynamic Status Icon -->
                     <div id="result-icon-box" class="w-14 h-14 rounded-2xl bg-slate-100 text-slate-400 flex items-center justify-center shrink-0 transition-colors duration-300">
                         <i id="result-icon" data-lucide="scan-face" class="w-7 h-7"></i>
                     </div>
 
-                    <!-- Prominent Class Name & Percentage -->
                     <div class="flex-1 min-w-0">
                         <div class="flex items-baseline justify-between gap-2">
                             <h2 id="prediction-label" class="text-2xl font-bold text-slate-400 tracking-tight truncate">
@@ -217,7 +204,6 @@
                     </div>
                 </div>
 
-                <!-- Visual Confidence Progress Bar -->
                 <div class="mt-3">
                     <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
                         <div id="confidence-bar" class="h-full w-0 bg-slate-300 rounded-full transition-all duration-200"></div>
@@ -239,16 +225,13 @@
             </div>
         </main>
 
-        <!-- Bottom Home Indicator Bar -->
         <div class="py-2 bg-slate-50 flex justify-center shrink-0">
             <div class="w-32 h-1 bg-slate-300 rounded-full"></div>
         </div>
 
-        <!-- ========================================================= -->
-        <!-- MODAL 1: ข้อมูลโมเดล & วิธีใช้งาน (Model Info & Instructions) -->
-        <!-- ========================================================= -->
+        <!-- MODAL: Info -->
         <div id="info-modal" class="hidden absolute inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4">
-            <div class="bg-white w-full max-h-[88%] rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-slide-up">
+            <div class="bg-white w-full max-h-[88%] rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden">
                 <div class="px-5 py-4 border-b border-slate-100 flex items-center justify-between">
                     <div class="flex items-center gap-2">
                         <i data-lucide="cpu" class="w-5 h-5 text-sky-600"></i>
@@ -258,45 +241,20 @@
                         <i data-lucide="x" class="w-4 h-4"></i>
                     </button>
                 </div>
-
                 <div class="p-5 overflow-y-auto space-y-4 text-xs text-slate-600 leading-relaxed">
-                    <!-- Model Metadata Card -->
                     <div class="bg-sky-50/70 border border-sky-100 rounded-2xl p-3.5 space-y-1.5">
                         <p class="font-semibold text-sky-900 text-sm">รายละเอียดโมเดล (Teachable Machine)</p>
                         <p><span class="font-medium text-slate-700">ไลบรารี:</span> TensorFlow.js &amp; @teachablemachine/image</p>
-                        <p><span class="font-medium text-slate-700">คลาสเป้าหมาย:</span> 2 คลาส (MASK / NO MASK)</p>
-                        <div class="pt-1">
-                            <span class="font-medium text-slate-700 block mb-1">Model URL:</span>
-                            <code class="block bg-white px-2.5 py-1.5 rounded-lg border border-sky-200 text-[10px] text-sky-700 break-all select-all">
-                                https://teachablemachine.withgoogle.com/models/MygKwCIzR/
-                            </code>
-                        </div>
-                    </div>
-
-                    <!-- Usage Steps -->
-                    <div class="space-y-2">
-                        <p class="font-semibold text-slate-800 text-sm">ขั้นตอนการใช้งานแอปพลิเคชัน</p>
-                        <ol class="list-decimal list-inside space-y-1.5 text-slate-600">
-                            <li>กดปุ่ม <strong class="text-sky-600">"เปิดกล้อง / เริ่มตรวจจับ"</strong> และกดอนุญาต (Allow) ให้เบราว์เซอร์เข้าถึงกล้อง</li>
-                            <li>หันใบหน้าให้อยู่ในกรอบสแกนกลางหน้าจอ</li>
-                            <li>หากสวมหน้ากากอนามัย ระบบจะแสดงสถานะ <strong class="text-emerald-600">MASK</strong> สีเขียวพร้อมค่าร้อยละ (%)</li>
-                            <li>หากไม่ได้สวมหน้ากากอนามัย ระบบจะแสดงสถานะ <strong class="text-rose-600">NO MASK</strong> สีแดงพร้อมค่าร้อยละ (%)</li>
-                            <li>สามารถกดปุ่ม <strong>QR Code</strong> ด้านบนเพื่อสร้างคิวอาร์โค้ดสำหรับนำไปแนบในเล่มรายงาน LAB08</li>
-                        </ol>
+                        <p><span class="font-medium text-slate-700">การทำงาน:</span> ตรวจจับใบหน้าจริงและคัดกรองกรณีไม่มีหน้าคนอัตโนมัติ</p>
                     </div>
                 </div>
-
                 <div class="p-4 border-t border-slate-100 bg-slate-50">
-                    <button onclick="closeModal('info-modal')" class="w-full py-2.5 rounded-xl bg-slate-800 text-white font-medium text-xs hover:bg-slate-700 transition">
-                        ปิดหน้าต่าง
-                    </button>
+                    <button onclick="closeModal('info-modal')" class="w-full py-2.5 rounded-xl bg-slate-800 text-white font-medium text-xs hover:bg-slate-700 transition">ปิดหน้าต่าง</button>
                 </div>
             </div>
         </div>
 
-        <!-- ========================================================= -->
-        <!-- MODAL 2: Built-in QR Code Generator for Lab Deliverable   -->
-        <!-- ========================================================= -->
+        <!-- MODAL: QR Code -->
         <div id="qr-modal" class="hidden absolute inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4">
             <div class="bg-white w-full max-h-[90%] rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden">
                 <div class="px-5 py-4 border-b border-slate-100 flex items-center justify-between">
@@ -308,29 +266,18 @@
                         <i data-lucide="x" class="w-4 h-4"></i>
                     </button>
                 </div>
-
                 <div class="p-5 overflow-y-auto flex flex-col items-center text-center space-y-4">
-                    <p class="text-xs text-slate-500">
-                        สแกน QR Code ด้านล่างด้วยกล้องมือถือเพื่อเปิดใช้งานแอปพลิเคชัน หรือบันทึกภาพเพื่อนำไปส่งงานในหัวข้อ LAB08
-                    </p>
-
-                    <!-- QR Code Canvas Output Box -->
+                    <p class="text-xs text-slate-500">สแกน QR Code ด้านล่างเพื่อเปิดใช้งานหรือนำไปใส่ในเล่มรายงาน LAB08</p>
                     <div class="p-4 bg-white rounded-2xl border-2 border-dashed border-sky-200 shadow-inner flex items-center justify-center">
                         <div id="qrcode-display"></div>
                     </div>
-
-                    <!-- Customizable URL Input -->
                     <div class="w-full text-left space-y-1.5">
-                        <label for="qr-url-input" class="text-[11px] font-medium text-slate-600">ลิงก์ URL ของแอปพลิเคชัน (สามารถแก้ไขได้):</label>
+                        <label for="qr-url-input" class="text-[11px] font-medium text-slate-600">ลิงก์ URL ของแอปพลิเคชัน:</label>
                         <div class="flex gap-1.5">
                             <input id="qr-url-input" type="text" class="flex-1 text-xs px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:border-sky-500 bg-slate-50 text-slate-700" placeholder="https://...">
-                            <button onclick="generateQRCode()" class="px-3 py-2 rounded-xl bg-sky-600 text-white text-xs font-medium hover:bg-sky-500 transition shrink-0">
-                                สร้างใหม่
-                            </button>
+                            <button onclick="generateQRCode()" class="px-3 py-2 rounded-xl bg-sky-600 text-white text-xs font-medium hover:bg-sky-500 transition shrink-0">สร้างใหม่</button>
                         </div>
                     </div>
-
-                    <!-- Download QR Image Button -->
                     <button onclick="downloadQRCode()" class="w-full py-2.5 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-medium text-xs flex items-center justify-center gap-2 transition shadow-sm">
                         <i data-lucide="download" class="w-4 h-4"></i>
                         <span>ดาวน์โหลดรูปภาพ QR Code (.png)</span>
@@ -343,10 +290,8 @@
 
     <!-- Application Logic -->
     <script>
-        // Initialize Lucide icons
         lucide.createIcons();
 
-        // Update simulated mobile clock
         function updateClock() {
             const now = new Date();
             const hours = String(now.getHours()).padStart(2, '0');
@@ -357,9 +302,6 @@
         updateClock();
         setInterval(updateClock, 15000);
 
-        // ==========================================
-        // Teachable Machine Model Configuration
-        // ==========================================
         const MODEL_URL = "https://teachablemachine.withgoogle.com/models/MygKwCIzR/";
         
         let model = null;
@@ -369,7 +311,6 @@
         let isMirrored = true;
         let useFrontCamera = true;
 
-        // DOM Elements
         const startBtn = document.getElementById('start-btn');
         const stopBtn = document.getElementById('stop-btn');
         const webcamContainer = document.getElementById('webcam-container');
@@ -380,7 +321,6 @@
         const statusBanner = document.getElementById('status-banner');
         const statusBannerText = document.getElementById('status-banner-text');
 
-        // Result Display Elements
         const resultCard = document.getElementById('result-card');
         const statusBadge = document.getElementById('status-badge');
         const resultIconBox = document.getElementById('result-icon-box');
@@ -403,36 +343,30 @@
             statusBanner.classList.add('hidden');
         }
 
-        // Start Camera & Model Inference
         async function startDetection() {
             if (isRunning) return;
             hideBanner();
 
             try {
-                // UI Loading State
                 startBtn.disabled = true;
                 startBtn.classList.add('opacity-60');
                 cameraPlaceholder.classList.add('hidden');
                 cameraLoading.classList.remove('hidden');
 
-                // Load Teachable Machine model if not already cached
                 if (!model) {
                     const modelURL = MODEL_URL + "model.json";
                     const metadataURL = MODEL_URL + "metadata.json";
                     model = await tmImage.load(modelURL, metadataURL);
                 }
 
-                // Setup Webcam with facingMode support for mobile
                 webcam = new tmImage.Webcam(320, 320, isMirrored);
                 const facingMode = useFrontCamera ? "user" : "environment";
                 await webcam.setup({ facingMode: facingMode });
                 await webcam.play();
 
-                // Mount canvas cleanly
                 webcamContainer.innerHTML = '';
                 webcamContainer.appendChild(webcam.canvas);
 
-                // Update UI to Active State
                 isRunning = true;
                 cameraLoading.classList.add('hidden');
                 scannerOverlay.classList.remove('hidden');
@@ -442,7 +376,6 @@
                 startBtn.innerHTML = `<i data-lucide="activity" class="w-5 h-5 animate-pulse"></i><span>กำลังตรวจจับแบบเรียลไทม์...</span>`;
                 lucide.createIcons();
 
-                // Start prediction loop
                 animationFrameId = window.requestAnimationFrame(loop);
 
             } catch (error) {
@@ -455,7 +388,6 @@
             }
         }
 
-        // Main Prediction Loop
         async function loop() {
             if (!isRunning || !webcam) return;
             webcam.update();
@@ -463,14 +395,65 @@
             animationFrameId = window.requestAnimationFrame(loop);
         }
 
-        // Classify Frame & Update UI Dynamically
+        // ฟังก์ชันวิเคราะห์ผิวภาพและเช็คว่ามีใบหน้ามนุษย์หรือสкинโทน (Skin-tone & Edge check) ปรากฏอยู่จริงหรือไม่
+        function detectFacePresence(canvas) {
+            try {
+                const ctx = canvas.getContext('2d');
+                const w = canvas.width;
+                const h = canvas.height;
+                const imgData = ctx.getImageData(0, 0, w, h);
+                const data = imgData.data;
+
+                let skinPixelCount = 0;
+                let totalSampled = 0;
+                let brightnessSum = 0;
+
+                // สุ่มตรวจพิกเซลแบบ Grid
+                for (let y = 0; y < h; y += 8) {
+                    for (let x = 0; x < w; x += 8) {
+                        const idx = (y * w + x) * 4;
+                        const r = data[idx];
+                        const g = data[idx + 1];
+                        const b = data[idx + 2];
+
+                        brightnessSum += (r + g + b) / 3;
+                        totalSampled++;
+
+                        // ตรวจสอบช่วงสีผิวคร่าวๆ (Skin-tone color range heuristic)
+                        const isSkinTone = (r > 60 && g > 40 && b > 20 && r > g && r > b && Math.abs(r - g) > 15 && (r - b) > 15);
+                        if (isSkinTone) {
+                            skinPixelCount++;
+                        }
+                    }
+                }
+
+                const avgBrightness = brightnessSum / totalSampled;
+                const skinRatio = skinPixelCount / totalSampled;
+
+                // เงื่อนไข: ถ้ามืดเกินไป สว่างจ้าเกินไป หรือไม่มีสัดส่วนสีผิวเลย ถือว่าไม่มีหน้าคน
+                if (avgBrightness < 25 || avgBrightness > 235 || skinRatio < 0.03) {
+                    return false;
+                }
+                return true;
+            } catch (e) {
+                return true;
+            }
+        }
+
         async function predict() {
             if (!model || !webcam) return;
 
+            // 1. ตรวจสอบก่อนว่ามีหน้าคน / สีผิวอยู่ในเฟรมจริงหรือไม่
+            const hasFace = detectFacePresence(webcam.canvas);
+            if (!hasFace) {
+                renderNoFaceDetected();
+                return;
+            }
+
+            // 2. ถ้ามีหน้าคน ให้ประมวลผลผ่าน Teachable Machine ปกติ
             const predictions = await model.predict(webcam.canvas);
             if (!predictions || predictions.length === 0) return;
 
-            // Find the prediction with the highest probability
             let topPrediction = predictions[0];
             for (let i = 1; i < predictions.length; i++) {
                 if (predictions[i].probability > topPrediction.probability) {
@@ -478,21 +461,51 @@
                 }
             }
 
-            // Dynamic case-insensitive check regardless of class index order
+            const percentage = (topPrediction.probability * 100).toFixed(2);
+            
+            // กำหนดเกณฑ์ความมั่นใจขั้นต่ำ (Confidence Threshold) เพื่อป้องกันโมเดลทายสุ่ม
+            if (topPrediction.probability < 0.60) {
+                renderNoFaceDetected();
+                return;
+            }
+
             const rawName = topPrediction.className.trim().toLowerCase();
             const isNoMask = rawName.includes('no') || rawName.includes('ไม่');
             const isMask = !isNoMask && rawName.includes('mask');
 
-            const percentage = (topPrediction.probability * 100).toFixed(2);
-
             if (isMask) {
                 renderMaskDetected(percentage);
-            } else {
+            } else if (isNoMask) {
                 renderNoMaskDetected(percentage);
+            } else {
+                renderNoFaceDetected();
             }
         }
 
-        // UI State: Wearing Mask (Green Badge/Card)
+        // UI State: ไม่พบใบหน้า (จะไม่แสดงเปอร์เซ็นต์ หรือแสดงเป็น 0.00%)
+        function renderNoFaceDetected() {
+            resultCard.className = "bg-amber-50/90 rounded-3xl p-4 shadow-md border-2 border-amber-400 transition-all duration-200";
+            statusBadge.className = "px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-amber-500 text-white";
+            statusBadge.textContent = "ไม่พบใบหน้าคนในกล้อง";
+
+            resultIconBox.className = "w-14 h-14 rounded-2xl bg-amber-500 text-white flex items-center justify-center shrink-0 shadow-sm";
+            resultIconBox.innerHTML = `<i data-lucide="user-x" class="w-8 h-8"></i>`;
+
+            predictionLabel.className = "text-2xl font-extrabold text-amber-700 tracking-tight";
+            predictionLabel.textContent = "NO FACE";
+
+            predictionPercent.className = "text-xl font-extrabold text-amber-600 tabular-nums";
+            predictionPercent.textContent = "0.00%";
+
+            predictionSubtext.className = "text-xs text-amber-700/80 font-medium mt-0.5";
+            predictionSubtext.textContent = "กรุณาหันหน้าเข้าหากล้องและอยู่ในบริเวณที่มีแสงสว่าง";
+
+            confidenceBar.className = "h-full bg-amber-500 rounded-full transition-all duration-150";
+            confidenceBar.style.width = "0%";
+
+            lucide.createIcons();
+        }
+
         function renderMaskDetected(percentage) {
             resultCard.className = "bg-emerald-50/90 rounded-3xl p-4 shadow-md border-2 border-emerald-400 transition-all duration-200";
             statusBadge.className = "px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-500 text-white";
@@ -516,7 +529,6 @@
             lucide.createIcons();
         }
 
-        // UI State: NOT Wearing Mask (Red Alert Badge/Card)
         function renderNoMaskDetected(percentage) {
             resultCard.className = "bg-rose-50/90 rounded-3xl p-4 shadow-md border-2 border-rose-400 transition-all duration-200";
             statusBadge.className = "px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-rose-600 text-white animate-pulse";
@@ -540,7 +552,6 @@
             lucide.createIcons();
         }
 
-        // Stop Camera & Reset UI
         function stopDetection() {
             isRunning = false;
             if (animationFrameId) {
@@ -557,13 +568,11 @@
             cameraTools.classList.add('hidden');
             cameraPlaceholder.classList.remove('hidden');
 
-            // Reset Buttons
             startBtn.disabled = false;
             startBtn.classList.remove('opacity-60');
             startBtn.innerHTML = `<i data-lucide="video" class="w-5 h-5"></i><span>เปิดกล้อง / เริ่มตรวจจับ</span>`;
             stopBtn.disabled = true;
 
-            // Reset Result Card
             resultCard.className = "bg-white rounded-3xl p-4 shadow-sm border border-slate-200/80 transition-all duration-300";
             statusBadge.className = "px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-slate-100 text-slate-500";
             statusBadge.textContent = "หยุดการทำงานแล้ว";
@@ -586,7 +595,6 @@
             lucide.createIcons();
         }
 
-        // Toggle Mirror View
         async function toggleMirror() {
             if (!isRunning) return;
             isMirrored = !isMirrored;
@@ -594,24 +602,19 @@
             await startDetection();
         }
 
-        // Switch Front / Back Camera
         async function switchCamera() {
             if (!isRunning) return;
             useFrontCamera = !useFrontCamera;
-            isMirrored = useFrontCamera; // Mirror front camera by default, unmirror back camera
+            isMirrored = useFrontCamera;
             stopDetection();
             await startDetection();
         }
 
-        // ==========================================
-        // Modal & QR Code Generator Logic
-        // ==========================================
         function openModal(modalId) {
             document.getElementById(modalId).classList.remove('hidden');
             if (modalId === 'qr-modal') {
                 const input = document.getElementById('qr-url-input');
                 if (!input.value) {
-                    // Default to current URL or Teachable Machine model preview link if running locally/blob
                     const currentHref = window.location.href;
                     input.value = currentHref.startsWith('http') ? currentHref : MODEL_URL;
                 }
@@ -631,7 +634,7 @@
             new QRCode(container, {
                 text: urlText,
                 width: 176,
-                height: 176,
+    height: 176,
                 colorDark: "#0f172a",
                 colorLight: "#ffffff",
                 correctLevel: QRCode.CorrectLevel.H
