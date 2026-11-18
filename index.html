@@ -229,9 +229,11 @@
             <div class="w-32 h-1 bg-slate-300 rounded-full"></div>
         </div>
 
-        <!-- MODAL: Info -->
+   <!-- ========================================================= -->
+        <!-- MODAL 1: ข้อมูลโมเดล & วิธีใช้งาน (Model Info & Instructions) -->
+        <!-- ========================================================= -->
         <div id="info-modal" class="hidden absolute inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4">
-            <div class="bg-white w-full max-h-[88%] rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden">
+            <div class="bg-white w-full max-h-[88%] rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden animate-slide-up">
                 <div class="px-5 py-4 border-b border-slate-100 flex items-center justify-between">
                     <div class="flex items-center gap-2">
                         <i data-lucide="cpu" class="w-5 h-5 text-sky-600"></i>
@@ -241,18 +243,42 @@
                         <i data-lucide="x" class="w-4 h-4"></i>
                     </button>
                 </div>
+
                 <div class="p-5 overflow-y-auto space-y-4 text-xs text-slate-600 leading-relaxed">
+                    <!-- Model Metadata Card -->
                     <div class="bg-sky-50/70 border border-sky-100 rounded-2xl p-3.5 space-y-1.5">
                         <p class="font-semibold text-sky-900 text-sm">รายละเอียดโมเดล (Teachable Machine)</p>
                         <p><span class="font-medium text-slate-700">ไลบรารี:</span> TensorFlow.js &amp; @teachablemachine/image</p>
-                        <p><span class="font-medium text-slate-700">การทำงาน:</span> ตรวจจับใบหน้าจริงและคัดกรองกรณีไม่มีหน้าคนอัตโนมัติ</p>
+                        <p><span class="font-medium text-slate-700">คลาสเป้าหมาย:</span> 2 คลาส (MASK / NO MASK)</p>
+                        <div class="pt-1">
+                            <span class="font-medium text-slate-700 block mb-1">Model URL:</span>
+                            <code class="block bg-white px-2.5 py-1.5 rounded-lg border border-sky-200 text-[10px] text-sky-700 break-all select-all">
+                                https://teachablemachine.withgoogle.com/models/MygKwCIzR/
+                            </code>
+                        </div>
+                    </div>
+
+                    <!-- Usage Steps -->
+                    <div class="space-y-2">
+                        <p class="font-semibold text-slate-800 text-sm">ขั้นตอนการใช้งานแอปพลิเคชัน</p>
+                        <ol class="list-decimal list-inside space-y-1.5 text-slate-600">
+                            <li>กดปุ่ม <strong class="text-sky-600">"เปิดกล้อง / เริ่มตรวจจับ"</strong> และกดอนุญาต (Allow) ให้เบราว์เซอร์เข้าถึงกล้อง</li>
+                            <li>หันใบหน้าให้อยู่ในกรอบสแกนกลางหน้าจอ</li>
+                            <li>หากสวมหน้ากากอนามัย ระบบจะแสดงสถานะ <strong class="text-emerald-600">MASK</strong> สีเขียวพร้อมค่าร้อยละ (%)</li>
+                            <li>หากไม่ได้สวมหน้ากากอนามัย ระบบจะแสดงสถานะ <strong class="text-rose-600">NO MASK</strong> สีแดงพร้อมค่าร้อยละ (%)</li>
+                            <li>สามารถกดปุ่ม <strong>QR Code</strong> ด้านบนเพื่อสร้างคิวอาร์โค้ดสำหรับนำไปแนบในเล่มรายงาน LAB08</li>
+                        </ol>
                     </div>
                 </div>
+
                 <div class="p-4 border-t border-slate-100 bg-slate-50">
-                    <button onclick="closeModal('info-modal')" class="w-full py-2.5 rounded-xl bg-slate-800 text-white font-medium text-xs hover:bg-slate-700 transition">ปิดหน้าต่าง</button>
+                    <button onclick="closeModal('info-modal')" class="w-full py-2.5 rounded-xl bg-slate-800 text-white font-medium text-xs hover:bg-slate-700 transition">
+                        ปิดหน้าต่าง
+                    </button>
                 </div>
             </div>
         </div>
+
 
         <!-- MODAL: QR Code -->
         <div id="qr-modal" class="hidden absolute inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4">
